@@ -72,7 +72,7 @@ class DurationWidget extends ConsumerWidget {
             SizedBox(height: height / 25),
             const CicleChronometers(),
             SizedBox(height: height / 25),
-            const Text("Duración ejercicios", style: TextStyle(fontSize: 30)),
+            const Text("Duración ejercicios", style: TextStyle(fontSize: 20)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

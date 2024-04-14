@@ -10,5 +10,10 @@ final routes = GoRouter(
       builder: (context, state) => const HomeScreen(),
       name: HomeScreen.name,
     ),
+    // GoRoute(
+    //   path: "/cicles",
+    //   builder: (context, state) => const HomeScreen(),
+    //   name: HomeScreen.name,
+    // ),
   ],
 );

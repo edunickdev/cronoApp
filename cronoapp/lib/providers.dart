@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
-final mainMode = StateProvider<int>((ref) => 1);
+final mainMode = StateProvider<bool>((ref) => false);
 final mainHours = StateProvider<String>((ref) => "00");
 final mainMinutes = StateProvider<String>((ref) => "00");
 final mainSeconds = StateProvider<String>((ref) => "00");

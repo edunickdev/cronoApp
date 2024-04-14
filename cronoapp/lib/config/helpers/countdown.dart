@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers.dart';
 
 Timer startTimeCountDown(WidgetRef ref, Timer timer) {
-  if (ref.watch(mainMode) == 0 &&
+  if (ref.watch(mainMode) == false &&
       ref.watch(mainHours) == "00" &&
       ref.watch(mainMinutes) == "00" &&
       ref.watch(mainSeconds) == "00" &&
@@ -19,7 +19,7 @@ Timer startTimeCountDown(WidgetRef ref, Timer timer) {
   ref.read(mainIsRunning.notifier).state = true;
 
   timer = Timer.periodic(
-    const Duration(milliseconds: 10),
+    const Duration(milliseconds: 5),
     (timer) {
       int miliseconds = int.parse(ref.read(mainmiliSeconds.notifier).state);
       int seconds = int.parse(ref.read(mainSeconds.notifier).state);

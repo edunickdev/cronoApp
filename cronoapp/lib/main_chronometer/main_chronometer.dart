@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,52 +11,47 @@ class MainChronometer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentMode = ref.watch(mainMode);
+    final diagonal = sqrt(pow(MediaQuery.of(context).size.height, 2) + pow(MediaQuery.of(context).size.width, 2));
+
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: SegmentedButton(
-              onSelectionChanged: (p0) {
-                if (ref.watch(mainIsRunning) == false) {
-                  ref.read(mainMode.notifier).state = p0.firstOrNull!;
-                  ref.read(mainHours.notifier).state = "00";
-                  ref.read(mainMinutes.notifier).state = "00";
-                  ref.read(mainSeconds.notifier).state = "00";
-                  ref.read(mainmiliSeconds.notifier).state = "00";
-                }
-              },
-              segments: const [
-                ButtonSegment(label: Text("Cuenta regresiva", style: TextStyle(fontSize: 15),), value: 0),
-                ButtonSegment(label: Text("Cronometro", style: TextStyle(fontSize: 15),), value: 1)
-              ],
-              selected: {ref.watch(mainMode)},
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: SegmentedButton(
+                onSelectionChanged: (p0) {
+                  if (ref.watch(mainIsRunning) == false) {
+                    ref.read(mainMode.notifier).state = !currentMode;
+                    ref.read(mainHours.notifier).state = "00";
+                    ref.read(mainMinutes.notifier).state = "00";
+                    ref.read(mainSeconds.notifier).state = "00";
+                    ref.read(mainmiliSeconds.notifier).state = "00";
+                  }
+                },
+                segments:[
+                  ButtonSegment(
+                    label: Text(
+                      "Cuenta atras",
+                      style: TextStyle(fontSize: diagonal * 0.02),
+                    ),
+                    value: false,
+                  ),
+                  ButtonSegment(
+                    label: Text(
+                      "Cronometro",
+                      style: TextStyle(fontSize: diagonal * 0.02),
+                    ),
+                    value: true,
+                  )
+                ],
+                selected: {ref.watch(mainMode)},
+              ),
             ),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Consumer(builder: (context, ref, child) {
-              String hours = ref.watch(mainHours);
-              return ref.read(mainMode.notifier).state == 0 ? CustomField(text: "Horas", value: hours) : Text( hours, style: const TextStyle(fontSize: 50));
-            }),
-            const Text(":", style: TextStyle(fontSize: 50)),
-            Consumer(builder: (context, ref, child) {
-              String minutes = ref.watch(mainMinutes);
-              return ref.read(mainMode.notifier).state == 0 ? CustomField(text: "Minutos", value: minutes) : Text( minutes, style: const TextStyle(fontSize: 50));
-            }),
-            const Text(":", style: TextStyle(fontSize: 50)),
-            Consumer(builder: (context, ref, child) {
-              String seconds = ref.watch(mainSeconds);
-              return ref.read(mainMode.notifier).state == 0 ? CustomField(text: "Segundos", value: seconds) : Text( seconds, style: const TextStyle(fontSize: 50));
-            }),
-            const Text(":", style: TextStyle(fontSize: 30)),
-            Consumer(builder: (context, ref, child) {
-              String miliseconds = ref.watch(mainmiliSeconds);
-              return Text(
-                miliseconds.length == 1 ? "0$miliseconds" : miliseconds,
-                style: const TextStyle(fontSize: 30),
-              );
-            }),
-          ]),
         ],
       ),
     );
@@ -65,8 +62,13 @@ class MainChronometer extends ConsumerWidget {
 class CustomField extends ConsumerWidget {
   final String text;
   String value;
+  final double diagonal;
   TextEditingController controller = TextEditingController();
-  CustomField({super.key, required this.text, required this.value});
+  CustomField(
+      {super.key,
+      required this.text,
+      required this.value,
+      required this.diagonal});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,7 +122,13 @@ class CustomField extends ConsumerWidget {
       },
       child: Text(
         value.length == 1 ? "0$value" : value,
-        style: const TextStyle(fontSize: 50),
+        style: TextStyle(
+            fontSize: diagonal * 0.1,
+            color: ref.read(mainHours.notifier).state != "00" &&
+                    ref.read(mainMinutes.notifier).state != "00" &&
+                    ref.read(mainSeconds.notifier).state != "00"
+                ? Colors.black
+                : Colors.red[400]),
       ),
     );
   }
