@@ -21,6 +21,9 @@ class HomeScreen extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (value) {
+            print(value);
+          },
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Chrono"),
             NavigationDestination(
