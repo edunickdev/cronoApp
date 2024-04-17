@@ -16,8 +16,8 @@ class CustomNavBarWidget extends ConsumerWidget {
         ref.read(selectScreen.notifier).state = value;
       },
       destinations: const [
-        NavigationDestination(icon: Icon(Icons.home), label: "Chrono"),
-        NavigationDestination(icon: Icon(Icons.dashboard_customize), label: "Cycles"),
+        NavigationDestination(icon: Icon(Icons.home), label: "General"),
+        NavigationDestination(icon: Icon(Icons.dashboard_customize), label: "Personal"),
       ],
     );
   }

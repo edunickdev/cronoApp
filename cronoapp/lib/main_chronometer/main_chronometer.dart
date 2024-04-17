@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:cronoapp/providers.dart';
 
@@ -12,7 +11,8 @@ class MainChronometer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentMode = ref.watch(mainMode);
-    final diagonal = sqrt(pow(MediaQuery.of(context).size.height, 2) + pow(MediaQuery.of(context).size.width, 2));
+    final diagonal = sqrt(pow(MediaQuery.of(context).size.height, 2) +
+        pow(MediaQuery.of(context).size.width, 2));
 
     return Center(
       child: Column(
@@ -32,7 +32,7 @@ class MainChronometer extends ConsumerWidget {
                     ref.read(mainmiliSeconds.notifier).state = "00";
                   }
                 },
-                segments:[
+                segments: [
                   ButtonSegment(
                     label: Text(
                       "Cuenta atras",
@@ -87,7 +87,7 @@ class CustomField extends ConsumerWidget {
         }
       }
       controller.clear();
-      context.pop();
+      Navigator.of(context).pop();
     }
 
     return InkWell(
@@ -108,7 +108,7 @@ class CustomField extends ConsumerWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  context.pop();
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Cancelar'),
               ),
@@ -123,12 +123,13 @@ class CustomField extends ConsumerWidget {
       child: Text(
         value.length == 1 ? "0$value" : value,
         style: TextStyle(
-            fontSize: diagonal * 0.1,
-            color: ref.read(mainHours.notifier).state != "00" &&
-                    ref.read(mainMinutes.notifier).state != "00" &&
-                    ref.read(mainSeconds.notifier).state != "00"
-                ? Colors.black
-                : Colors.red[400]),
+          fontSize: diagonal * 0.1,
+          color: ref.read(mainHours.notifier).state != "00" &&
+                  ref.read(mainMinutes.notifier).state != "00" &&
+                  ref.read(mainSeconds.notifier).state != "00"
+              ? Colors.black
+              : Colors.red[400],
+        ),
       ),
     );
   }

@@ -11,7 +11,7 @@ class CustomCircularChronometer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     Stream<int> totalExercise () async* {
-      List cycle = ref.watch(cycles);
+      List cycle = ref.watch(objectCycles);
       print(cycle);
       for (int i = 0; i < cycle.length; i++) {
         yield i;

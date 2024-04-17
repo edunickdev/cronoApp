@@ -1,6 +1,5 @@
 import 'package:cronoapp/cicles_chronometer/duration_cicles.dart';
 import 'package:cronoapp/main_chronometer/timers_widget.dart';
-import 'package:cronoapp/presentation/shared/custom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,31 +17,28 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final double totalHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      bottomNavigationBar: const CustomNavBarWidget(),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: totalHeight * 0.2,
-                  child: const MainChronometer(),
-                ),
-                Container(
-                  color: Colors.grey[300],
-                  height: totalHeight * 0.42,
-                  child: const TimersWidget(),
-                ),
-                SizedBox(
-                  height: totalHeight * 0.2,
-                  child: MainCronometerButtonsWidget(),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: totalHeight * 0.2,
+                child: const MainChronometer(),
+              ),
+              Container(
+                color: Colors.grey[300],
+                height: totalHeight * 0.42,
+                child: const TimersWidget(),
+              ),
+              SizedBox(
+                height: totalHeight * 0.2,
+                child: MainCronometerButtonsWidget(),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -106,7 +102,7 @@ class MainCronometerWidget extends ConsumerWidget {
                     actions: [
                       IconButton(
                         onPressed: () {
-                          ref.read(cycles.notifier).state = createCycles();
+                          ref.read(objectCycles.notifier).state = createCycles();
                           context.pop();
                         },
                         icon: const Icon(Icons.save, size: 40),

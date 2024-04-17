@@ -14,6 +14,7 @@ final secsExercise = StateProvider<String>((ref) => "00");
 final minsBreak = StateProvider<String>((ref) => "00");
 final secsBreak = StateProvider<String>((ref) => "00");
 final moments = StateProvider<int>((ref) => 0);
-final cycles = StateProvider<List<List<int>>>((ref) => []);
+final cyclesAmount = StateProvider<int>((ref) => 0);
+final objectCycles = StateProvider<List<List<int>>>((ref) => []);
 final totalBreakTime = StateProvider<int>((ref) => 0);
 final totalExerciseTime = StateProvider<int>((ref) => 0);

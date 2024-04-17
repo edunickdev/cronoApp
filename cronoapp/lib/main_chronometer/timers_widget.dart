@@ -71,7 +71,7 @@ class TimersWidget extends ConsumerWidget {
                 String miliseconds = ref.watch(mainmiliSeconds);
                 return Text(
                   miliseconds.length == 1 ? "0$miliseconds" : miliseconds,
-                  style: TextStyle(fontSize: 90),
+                  style: const TextStyle(fontSize: 90),
                 );
               },
             ),
