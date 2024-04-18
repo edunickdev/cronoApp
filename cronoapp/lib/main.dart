@@ -16,7 +16,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     List<Widget> screens = [const HomeScreen(), const CiclesScreen()];
     final int currentScreen = ref.watch(selectScreen);
 
@@ -28,10 +27,12 @@ class MyApp extends ConsumerWidget {
       home: Scaffold(
         body: screens[currentScreen],
         bottomNavigationBar: const CustomNavBarWidget(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.plus_one),
-        ),
+        floatingActionButton: currentScreen == 1
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: const Icon(Icons.keyboard_double_arrow_up_rounded))
+            : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

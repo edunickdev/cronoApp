@@ -8,16 +8,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 enum Operations { minus, plus }
 
 class CiclesSectionConfigWidget extends ConsumerWidget {
+  
   final BoxConstraints myConstrains;
 
   const CiclesSectionConfigWidget({required this.myConstrains, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
     final totalCicles = ref.watch(cyclesAmount);
-    final diagonal = sqrt(
-      pow(myConstrains.maxHeight, 2) - pow(myConstrains.maxWidth, 2),
-    );
+
+    final diagonal =
+        sqrt(pow(myConstrains.maxHeight, 2) - pow(myConstrains.maxWidth, 2));
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
