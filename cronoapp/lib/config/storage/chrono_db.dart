@@ -10,7 +10,7 @@ class DB {
         onCreate: (db, version) {
       return db.execute('''
           CREATE TABLE $tableName (
-            id INTEGER PRIMARY KEY, 
+            id INTEGER PRIMARY KEY AUTO INCREMENT, 
             title TEXT, 
             exerciseDurationTime TEXT, 
             breakDurationTime TEXT, 

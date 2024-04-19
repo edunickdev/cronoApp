@@ -179,17 +179,23 @@ void plusThirtyBreak(WidgetRef ref) {
 }
 
 void resetTimers(WidgetRef ref, MyOptions option) {
-  if (option == MyOptions.exercise) {
+  if (option == MyOptions.all) {
     ref.read(minsExercise.notifier).state = "00";
     ref.read(secsExercise.notifier).state = "00";
-  } else {
     ref.read(minsBreak.notifier).state = "00";
     ref.read(secsBreak.notifier).state = "00";
+    ref.read(cyclesAmount.notifier).state = 0;
+  } else if (option == MyOptions.breaks ){
+    ref.read(minsBreak.notifier).state = "00";
+    ref.read(secsBreak.notifier).state = "00";
+  } else {
+    ref.read(minsExercise.notifier).state = "00";
+    ref.read(secsExercise.notifier).state = "00";
   }
 }
 
 void configCycles(WidgetRef ref, Operations operation) {
-  final int currentCycles = ref.watch(cyclesAmount);
+  final currentCycles = ref.watch(cyclesAmount);
 
   if (currentCycles >= 0) {
     if (operation == Operations.plus) {

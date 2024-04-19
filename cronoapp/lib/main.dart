@@ -27,12 +27,6 @@ class MyApp extends ConsumerWidget {
       home: Scaffold(
         body: screens[currentScreen],
         bottomNavigationBar: const CustomNavBarWidget(),
-        floatingActionButton: currentScreen == 1
-            ? FloatingActionButton(
-                onPressed: () {},
-                child: const Icon(Icons.keyboard_double_arrow_up_rounded))
-            : null,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

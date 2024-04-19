@@ -3,7 +3,7 @@ import 'package:cronoapp/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum MyOptions { exercise, breaks }
+enum MyOptions { exercise, breaks, all }
 
 class SectionCyclesWidget extends ConsumerWidget {
   final BoxConstraints myConstrains;

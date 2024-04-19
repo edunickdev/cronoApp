@@ -3,7 +3,7 @@ class PersonConfig {
   final String title;
   final String exerciseDurationTime;
   final String breakDurationTime;
-  final int    cycles;
+  final int cycles;
 
   PersonConfig({
     required this.id,

@@ -11,6 +11,22 @@ class CiclesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Future<SnackBar> resultSnackbar() async {
+      final response = await savePersonConfig(ref);
+
+      final snackResponse = SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(response),
+        duration: const Duration(milliseconds: 1200),
+        backgroundColor: response.contains("ciclo") ||
+                response.contains("ejercicio") ||
+                response.contains("descanso")
+            ? Colors.redAccent
+            : Colors.green[400],
+      );
+
+      return snackResponse;
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -30,7 +46,10 @@ class CiclesScreen extends ConsumerWidget {
               CiclesSectionConfigWidget(myConstrains: constraints),
               const Divider(),
               ElevatedButton.icon(
-                onPressed: () => savePersonConfig(ref),
+                onPressed: () {
+                  resultSnackbar().then((snackbar) =>
+                      {ScaffoldMessenger.of(context).showSnackBar(snackbar)});
+                },
                 icon: const Icon(Icons.save),
                 label: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
