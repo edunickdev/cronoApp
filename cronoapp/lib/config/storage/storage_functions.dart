@@ -16,8 +16,8 @@ Future<String> savePersonConfig(WidgetRef ref) async {
     if (currentMinutesE != "00" || currentSecondsE != "00") {
       if (currentsecondsB != "00" || currentMinutesB != "00") {
         final newData = PersonConfig(
-          id: 3,
-          title: "title3",
+          id: 1,
+          title: "title1",
           exerciseDurationTime: "$currentMinutesE:$currentSecondsE",
           breakDurationTime: "$currentMinutesB:$currentsecondsB",
           cycles: currentCycles,

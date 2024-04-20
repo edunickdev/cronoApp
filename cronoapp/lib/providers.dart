@@ -19,4 +19,5 @@ final objectCycles = StateProvider<List<List<int>>>((ref) => []);
 final totalBreakTime = StateProvider<int>((ref) => 0);
 final totalExerciseTime = StateProvider<int>((ref) => 0);
 
+final configSelected = StateProvider<int>((ref) => 1);
 final myConfigList = StateProvider<List<String>?>((ref) => []);
