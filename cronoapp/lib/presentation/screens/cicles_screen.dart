@@ -1,5 +1,5 @@
-import 'package:cronoapp/config/storage/storage_functions.dart';
 import 'package:cronoapp/widgets/Cycles/cycles_section.dart';
+import 'package:cronoapp/widgets/Cycles/dropdownwidget.dart';
 import 'package:cronoapp/widgets/Cycles/section_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,25 +11,9 @@ class CiclesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<SnackBar> resultSnackbar() async {
-      final response = await savePersonConfig(ref);
-
-      final snackResponse = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(response),
-        duration: const Duration(milliseconds: 1200),
-        backgroundColor: response.contains("ciclo") ||
-                response.contains("ejercicio") ||
-                response.contains("descanso")
-            ? Colors.redAccent
-            : Colors.green[400],
-      );
-
-      return snackResponse;
-    }
-
     return LayoutBuilder(
       builder: (context, constraints) {
+
         return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -45,17 +29,7 @@ class CiclesScreen extends ConsumerWidget {
               const Divider(),
               CiclesSectionConfigWidget(myConstrains: constraints),
               const Divider(),
-              ElevatedButton.icon(
-                onPressed: () {
-                  resultSnackbar().then((snackbar) =>
-                      {ScaffoldMessenger.of(context).showSnackBar(snackbar)});
-                },
-                icon: const Icon(Icons.save),
-                label: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Text("Guardar"),
-                ),
-              )
+              const CustomDropdownWidget()
             ],
           ),
         );
@@ -63,3 +37,4 @@ class CiclesScreen extends ConsumerWidget {
     );
   }
 }
+

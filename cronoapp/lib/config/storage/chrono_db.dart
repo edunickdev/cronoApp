@@ -1,6 +1,7 @@
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 class DB {
   static Future<Database> _openDB() async {
@@ -10,7 +11,7 @@ class DB {
         onCreate: (db, version) {
       return db.execute('''
           CREATE TABLE $tableName (
-            id INTEGER PRIMARY KEY AUTO INCREMENT, 
+            id INTEGER PRIMARY KEY, 
             title TEXT, 
             exerciseDurationTime TEXT, 
             breakDurationTime TEXT, 
