@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cronoapp/widgets/Cycles/cycles_section.dart';
 import 'package:cronoapp/widgets/Cycles/dropdownwidget.dart';
 import 'package:cronoapp/widgets/Cycles/section_widget.dart';
@@ -11,6 +13,10 @@ class CiclesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final diagonal =
+        sqrt(pow(MediaQuery.of(context).size.height, 2) - pow(MediaQuery.of(context).size.width, 2));
+
     return LayoutBuilder(
       builder: (context, constraints) {
 
@@ -18,8 +24,8 @@ class CiclesScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
-              const Text("Ciclos", style: TextStyle(fontSize: 45)),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.045),
+              Text("Ciclos", style: TextStyle(fontSize: diagonal * 0.06)),
               const Divider(),
               SectionCyclesWidget(
                   myConstrains: constraints, title: MyOptions.exercise),

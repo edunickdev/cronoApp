@@ -34,23 +34,52 @@ class CustomDropdownWidget extends ConsumerWidget {
       return myList;
     }
 
-    void setCicles(WidgetRef ref, PersonConfig person){
-      print("ingreso a funcion");
+    void setCicles(WidgetRef ref, PersonConfig person) {
 
-      final tempBS = person.breakDurationTime.split(":")[1];
-      final tempBM = person.breakDurationTime.split(":")[0];
-      final tempES = person.breakDurationTime.split(":")[1];
-      final tempEM = person.breakDurationTime.split(":")[0];
+      ref.read(currentConfig.notifier).state = person;
 
-      print(tempBS);
-      print(tempEM);
-      print(tempES);
-      print(tempBM);
+      ref.read(secsBreak.notifier).state = person.breakDurationTime.split(":")[1];
+      ref.read(minsBreak.notifier).state = person.breakDurationTime.split(":")[0];
+      ref.read(secsExercise.notifier).state = person.exerciseDurationTime.split(":")[1];
+      ref.read(minsExercise.notifier).state = person.exerciseDurationTime.split(":")[0];
+      ref.read(cyclesAmount.notifier).state = person.cycles;
+    }
 
-      ref.read(secsBreak.notifier).state = "00";
-      ref.read(minsBreak.notifier).state = "00";
-      ref.read(secsExercise.notifier).state = "00";
-      ref.read(minsExercise.notifier).state = "00";
+    Future<void> setTitleConfig(BuildContext ctx) async {
+      final TextEditingController title = TextEditingController();
+      final theme = Theme.of(context).buttonTheme.colorScheme;
+
+      await showDialog(
+        context: ctx,
+        builder: (ctx) {
+          return AlertDialog(
+            title: const Text("Título de configuración"),
+            content: TextField(
+              controller: title,
+              decoration: const InputDecoration(
+                  hintText: "Ingresa el título de tu configuración."),
+            ),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(theme!.inversePrimary),
+                ),
+                child: const Text('Aceptar'),
+                onPressed: () {
+                  String inputValue = title.text;
+                  ref.read(titleConfig.notifier).state = inputValue;
+                  Navigator.pop(ctx);
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      await resultSnackbar().then(
+        (snackbar) => {ScaffoldMessenger.of(ctx).showSnackBar(snackbar)},
+      );
     }
 
     List<PersonConfig> myData = [];
@@ -62,11 +91,7 @@ class CustomDropdownWidget extends ConsumerWidget {
       children: [
         ElevatedButton.icon(
           onPressed: () {
-            resultSnackbar().then(
-              (snackbar) => {
-                ScaffoldMessenger.of(context).showSnackBar(snackbar),
-              },
-            );
+            setTitleConfig(context);
           },
           icon: const Icon(Icons.save),
           label: const Padding(

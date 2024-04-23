@@ -1,3 +1,4 @@
+import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final selectScreen = StateProvider<int>((ref) => 0);
@@ -21,3 +22,13 @@ final totalExerciseTime = StateProvider<int>((ref) => 0);
 
 final configSelected = StateProvider<int>((ref) => 1);
 final myConfigList = StateProvider<List<String>?>((ref) => []);
+final titleConfig = StateProvider((ref) => "");
+
+final currentConfig = StateProvider<PersonConfig>(
+  (ref) => PersonConfig(
+      id: 0,
+      title: "",
+      exerciseDurationTime: "",
+      breakDurationTime: "",
+      cycles: 0),
+);

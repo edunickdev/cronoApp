@@ -36,9 +36,9 @@ class CiclesSectionConfigWidget extends ConsumerWidget {
             totalCicles >= 0 && totalCicles < 10
                 ? "0$totalCicles"
                 : "$totalCicles",
-            style: const TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: diagonal * 0.04),
           ),
-          SizedBox(width: myConstrains.maxHeight * 0.02),
+          SizedBox(width: myConstrains.maxWidth * 0.02),
           IconButton.outlined(
               onPressed: () => configCycles(ref, Operations.plus),
               icon: const Icon(Icons.plus_one_outlined)),

@@ -1,4 +1,5 @@
 // ignore: depend_on_referenced_packages
+import 'package:cronoapp/domain/entities/new_config_model.dart';
 import 'package:path/path.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,7 +22,7 @@ class DB {
     }, version: 1);
   }
 
-  static Future<int> addConfig(PersonConfig newPerson) async {
+  static Future<int> addConfig(NewConfig newPerson) async {
     Database myDB = await _openDB();
 
     return myDB.insert(
@@ -48,6 +49,9 @@ class DB {
     Database myDB = await _openDB();
 
     final myData = await myDB.query('customs');
+
+    print(myData);
+    print(myData.length);
 
     return List.generate(
       myData.length,
