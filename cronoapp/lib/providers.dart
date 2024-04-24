@@ -26,9 +26,12 @@ final titleConfig = StateProvider((ref) => "");
 
 final currentConfig = StateProvider<PersonConfig>(
   (ref) => PersonConfig(
-      id: 0,
-      title: "",
-      exerciseDurationTime: "",
-      breakDurationTime: "",
-      cycles: 0),
+    id: 0,
+    title: "",
+    exerciseDurationTime: "",
+    breakDurationTime: "",
+    cycles: 0,
+  ),
 );
+
+final showButton = StateProvider<bool>((ref) => false);

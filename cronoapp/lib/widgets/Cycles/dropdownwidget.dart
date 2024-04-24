@@ -43,6 +43,7 @@ class CustomDropdownWidget extends ConsumerWidget {
       ref.read(secsExercise.notifier).state = person.exerciseDurationTime.split(":")[1];
       ref.read(minsExercise.notifier).state = person.exerciseDurationTime.split(":")[0];
       ref.read(cyclesAmount.notifier).state = person.cycles;
+      ref.read(showButton.notifier).state = true;
     }
 
     Future<void> setTitleConfig(BuildContext ctx) async {
