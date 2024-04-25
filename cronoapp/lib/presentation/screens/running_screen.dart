@@ -5,21 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class CycleRunningScreen extends StatefulWidget {
-  final int amountMinutesEx;
-  final int amountSecondsEx;
-  final int amountMinutesBk;
-  final int amountSecondsBk;
-  final int amountCycles;
-
   final PersonConfig currenConfig;
 
   const CycleRunningScreen({
     Key? key,
-    required this.amountMinutesEx,
-    required this.amountSecondsEx,
-    required this.amountCycles,
-    required this.amountMinutesBk,
-    required this.amountSecondsBk,
     required this.currenConfig,
   }) : super(key: key);
 
@@ -39,11 +28,17 @@ class CycleRunningScreenState extends State<CycleRunningScreen> {
   @override
   void initState() {
     super.initState();
-    currentCycles = widget.amountCycles;
-    currentSecondsEx = widget.amountSecondsEx;
-    currentMinutesEx = widget.amountMinutesEx * 60 + currentSecondsBk;
-    currentSecondsBk = widget.amountSecondsBk;
-    currentMinutesBk = widget.amountMinutesBk * 60 + currentSecondsBk;
+    currentCycles = widget.currenConfig.cycles;
+    currentSecondsEx =
+        int.parse(widget.currenConfig.exerciseDurationTime.split(":")[1]);
+    currentMinutesEx =
+        int.parse(widget.currenConfig.exerciseDurationTime.split(":")[0]) * 60 +
+            currentSecondsEx;
+    currentSecondsBk =
+        int.parse(widget.currenConfig.breakDurationTime.split(":")[1]);
+    currentMinutesBk =
+        int.parse(widget.currenConfig.breakDurationTime.split(":")[0]) * 60 +
+            currentSecondsBk;
   }
 
   @override

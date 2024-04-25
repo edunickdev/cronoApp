@@ -49,26 +49,25 @@ class MyApp extends ConsumerWidget {
       ),
       routes: {
         "/cicles": (context) {
-          
           late final PersonConfig myData;
           final amountCycles = ref.watch(currentConfig);
           if (amountCycles.id != 0) {
             myData = ref.read(currentConfig.notifier).state;
           } else {
-            // myData = PersonConfig(id: 0, title: "default", exerciseDurationTime: exerciseDurationTime, breakDurationTime: breakDurationTime, cycles: ref.read(cyclesAmount.notifier).state);
-          }
-          final amountMinutesEx = int.parse(ref.read(minsExercise.notifier).state);
-          final amountSecondsEx = int.parse(ref.read(secsExercise.notifier).state);
-          final amountMinutesBk = int.parse(amountCycles.breakDurationTime.split(":")[0]);
-          final amountSecondsBk = int.parse(amountCycles.breakDurationTime.split(":")[1]);
+            final timeExercise =
+                "${ref.read(secsExercise.notifier).state}:${ref.read(minsExercise.notifier).state}";
+            final timeBreak =
+                "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
 
-          // return CycleRunningScreen(
-          //   amountCycles: amountCycles.cycles,
-          //   amountMinutesEx: amountMinutesEx,
-          //   amountSecondsEx: amountSecondsEx,
-          //   amountMinutesBk: amountMinutesBk,
-          //   amountSecondsBk: amountSecondsBk,
-          // );
+            myData = PersonConfig(
+                id: 0,
+                title: "default",
+                exerciseDurationTime: timeExercise,
+                breakDurationTime: timeBreak,
+                cycles: ref.read(cyclesAmount.notifier).state);
+          }
+
+          return CycleRunningScreen(currenConfig: myData);
         }
       },
     );
