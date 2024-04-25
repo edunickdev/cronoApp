@@ -68,7 +68,7 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ejercítate"),
+        title: Text(currentMode ? "Ejercítate" : "Descansa"),
       ),
       body: Center(
         child: currentCycles > 0
@@ -116,6 +116,7 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
       ),
       floatingActionButton: FadeInLeft(
         child: SpeedDial(
+          childPadding: const EdgeInsets.symmetric(vertical: 3),
           overlayOpacity: 0,
           animatedIcon: AnimatedIcons.menu_arrow,
           closeManually: true,
