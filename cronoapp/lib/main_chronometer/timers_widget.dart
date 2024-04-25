@@ -22,7 +22,7 @@ class TimersWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -35,9 +35,16 @@ class TimersWidget extends ConsumerWidget {
                               value: hours,
                               diagonal: currentDiagonal,
                             )
-                          : Text(
-                              hours,
-                              style: TextStyle(fontSize: currentDiagonal * 0.1),
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("HH"),
+                                Text(
+                                  hours,
+                                  style: TextStyle(
+                                      fontSize: currentDiagonal * 0.1),
+                                ),
+                              ],
                             );
                     },
                   ),
@@ -49,8 +56,15 @@ class TimersWidget extends ConsumerWidget {
                             text: "Minutos",
                             value: minutes,
                             diagonal: currentDiagonal)
-                        : Text(minutes,
-                            style: TextStyle(fontSize: currentDiagonal * 0.1));
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("MM"),
+                              Text(minutes,
+                                  style: TextStyle(
+                                      fontSize: currentDiagonal * 0.1)),
+                            ],
+                          );
                   }),
                   Text(":", style: TextStyle(fontSize: currentDiagonal * 0.05)),
                   Consumer(builder: (context, ref, child) {
@@ -60,8 +74,15 @@ class TimersWidget extends ConsumerWidget {
                             text: "Segundos",
                             value: seconds,
                             diagonal: currentDiagonal)
-                        : Text(seconds,
-                            style: TextStyle(fontSize: currentDiagonal * 0.1));
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("SS"),
+                              Text(seconds,
+                                  style: TextStyle(
+                                      fontSize: currentDiagonal * 0.1)),
+                            ],
+                          );
                   }),
                 ],
               ),

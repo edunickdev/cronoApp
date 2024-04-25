@@ -1,43 +1,48 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:cronoapp/domain/entities/person_model.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:animate_do/animate_do.dart';
+import 'package:cronoapp/domain/entities/person_model.dart';
 
 class CycleRunningScreen extends StatefulWidget {
-  final PersonConfig currenConfig;
+  final PersonConfig currentConfig;
 
   const CycleRunningScreen({
     Key? key,
-    required this.currenConfig,
+    required this.currentConfig,
   }) : super(key: key);
 
   @override
-  CycleRunningScreenState createState() => CycleRunningScreenState();
+  // ignore: library_private_types_in_public_api
+  _CycleRunningScreenState createState() => _CycleRunningScreenState();
 }
 
-class CycleRunningScreenState extends State<CycleRunningScreen> {
+class _CycleRunningScreenState extends State<CycleRunningScreen> {
   late int currentCycles;
   late int currentMinutesEx;
   late int currentSecondsEx;
   late int currentMinutesBk;
   late int currentSecondsBk;
-  final bool currentMode = true;
+  bool currentMode = true;
+  int totalCyclesCompleted = 0;
   final CountDownController _controller = CountDownController();
 
   @override
   void initState() {
     super.initState();
-    currentCycles = widget.currenConfig.cycles;
+    currentCycles = widget.currentConfig.cycles;
     currentSecondsEx =
-        int.parse(widget.currenConfig.exerciseDurationTime.split(":")[1]);
+        int.parse(widget.currentConfig.exerciseDurationTime.split(":")[1]);
     currentMinutesEx =
-        int.parse(widget.currenConfig.exerciseDurationTime.split(":")[0]) * 60 +
+        int.parse(widget.currentConfig.exerciseDurationTime.split(":")[0]) *
+                60 +
             currentSecondsEx;
     currentSecondsBk =
-        int.parse(widget.currenConfig.breakDurationTime.split(":")[1]);
+        int.parse(widget.currentConfig.breakDurationTime.split(":")[1]);
     currentMinutesBk =
-        int.parse(widget.currenConfig.breakDurationTime.split(":")[0]) * 60 +
+        int.parse(widget.currentConfig.breakDurationTime.split(":")[0]) * 60 +
             currentSecondsBk;
   }
 
@@ -45,43 +50,67 @@ class CycleRunningScreenState extends State<CycleRunningScreen> {
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
+    final diagonal = sqrt(pow(currentHeight, 2) - pow(currentWidth, 2));
 
     void newConfig() {
       setState(() {
-        if (currentCycles > 0) {
-          currentCycles = currentCycles - 1;
+        currentMode = !currentMode;
+        if (currentMode) {
+          currentCycles--;
+          totalCyclesCompleted++;
         }
       });
     }
 
+    void restartTimer() {
+      _controller.restart();
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ejercitate"),
+        title: const Text("Ejercítate"),
       ),
       body: Center(
         child: currentCycles > 0
-            ? CircularCountDownTimer(
-                key: UniqueKey(),
-                controller: _controller,
-                onComplete: () {
-                  setState(() {
-                    if (currentCycles > 0) {
-                      currentCycles = currentCycles - 1;
-                    }
-                  });
-                },
-                isReverse: true,
-                width: currentWidth / 2,
-                height: currentHeight * 0.3,
-                duration: currentMinutesEx,
-                textStyle: const TextStyle(fontSize: 30),
-                fillColor: Colors.green,
-                strokeCap: StrokeCap.round,
-                strokeWidth: 15,
-                ringColor: Colors.grey,
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "Total ciclos: ${widget.currentConfig.cycles > 0 && widget.currentConfig.cycles < 10 ? "0${widget.currentConfig.cycles}" : "${widget.currentConfig.cycles}"}",
+                    style: TextStyle(fontSize: diagonal * 0.03),
+                  ),
+                  Text("Ciclos completados: $totalCyclesCompleted",
+                      style: TextStyle(fontSize: diagonal * 0.03)),
+                  CircularCountDownTimer(
+                    key: UniqueKey(),
+                    controller: _controller,
+                    onChange: (value) {
+                      // TODO: Función que dispara el sonido
+                    },
+                    onComplete: () {
+                      newConfig();
+                      if (currentCycles > 0) {
+                        _controller.restart(
+                            duration: currentMode
+                                ? currentMinutesEx
+                                : currentMinutesBk);
+                      }
+                    },
+                    isReverse: true,
+                    width: currentWidth / 2,
+                    height: currentHeight * 0.3,
+                    duration: currentMode ? currentMinutesEx : currentMinutesBk,
+                    textStyle: const TextStyle(fontSize: 30),
+                    fillColor: Colors.green,
+                    strokeCap: StrokeCap.round,
+                    strokeWidth: 15,
+                    ringColor: Colors.grey,
+                  ),
+                  SizedBox(height: currentWidth / 6),
+                ],
               )
             : const Text(
-                "¡Felicidades! has terminado",
+                "¡Felicidades! Has terminado",
                 style: TextStyle(fontSize: 25),
               ),
       ),
@@ -104,7 +133,7 @@ class CycleRunningScreenState extends State<CycleRunningScreen> {
             SpeedDialChild(
               child: const Icon(Icons.refresh),
               label: "Reiniciar",
-              onTap: () => _controller.restart(),
+              onTap: restartTimer,
             ),
           ],
         ),

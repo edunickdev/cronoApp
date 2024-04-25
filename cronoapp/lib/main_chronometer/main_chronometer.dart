@@ -120,16 +120,25 @@ class CustomField extends ConsumerWidget {
           ),
         );
       },
-      child: Text(
-        value.length == 1 ? "0$value" : value,
-        style: TextStyle(
-          fontSize: diagonal * 0.1,
-          color: ref.read(mainHours.notifier).state != "00" &&
-                  ref.read(mainMinutes.notifier).state != "00" &&
-                  ref.read(mainSeconds.notifier).state != "00"
-              ? Colors.black
-              : Colors.red[400],
-        ),
+      child: Column(
+        children: [
+          Text(text == "Horas"
+              ? "HH"
+              : text == "Minutos"
+                  ? "MM"
+                  : "SS"),
+          Text(
+            value.length == 1 ? "0$value" : value,
+            style: TextStyle(
+              fontSize: diagonal * 0.1,
+              color: ref.read(mainHours.notifier).state != "00" &&
+                      ref.read(mainMinutes.notifier).state != "00" &&
+                      ref.read(mainSeconds.notifier).state != "00"
+                  ? Colors.black
+                  : Colors.red[400],
+            ),
+          ),
+        ],
       ),
     );
   }

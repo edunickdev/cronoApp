@@ -67,7 +67,7 @@ class MyApp extends ConsumerWidget {
                 cycles: ref.read(cyclesAmount.notifier).state);
           }
 
-          return CycleRunningScreen(currenConfig: myData);
+          return CycleRunningScreen(currentConfig: myData);
         }
       },
     );
