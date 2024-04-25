@@ -1,3 +1,4 @@
+import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:cronoapp/presentation/screens/running_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +22,6 @@ class MyApp extends ConsumerWidget {
     List<Widget> screens = [const HomeScreen(), const CiclesScreen()];
     final int currentScreen = ref.watch(selectScreen);
     final showBtn = ref.watch(showButton);
-    // final amountCycles = ref.watch(currentConfig);
-    // final amountMinutes =
-    //     int.parse(amountCycles.exerciseDurationTime.split(":")[0]);
-    // final amountSeconds =
-    //     int.parse(amountCycles.exerciseDurationTime.split(":")[1]);
-    // int currentCycle = amountCycles.cycles;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -54,11 +49,26 @@ class MyApp extends ConsumerWidget {
       ),
       routes: {
         "/cicles": (context) {
-          return const CycleRunningScreen(
-            amountCycles: 2,
-            amountMinutes: 1,
-            amountSeconds: 1,
-          );
+          
+          late final PersonConfig myData;
+          final amountCycles = ref.watch(currentConfig);
+          if (amountCycles.id != 0) {
+            myData = ref.read(currentConfig.notifier).state;
+          } else {
+            // myData = PersonConfig(id: 0, title: "default", exerciseDurationTime: exerciseDurationTime, breakDurationTime: breakDurationTime, cycles: ref.read(cyclesAmount.notifier).state);
+          }
+          final amountMinutesEx = int.parse(ref.read(minsExercise.notifier).state);
+          final amountSecondsEx = int.parse(ref.read(secsExercise.notifier).state);
+          final amountMinutesBk = int.parse(amountCycles.breakDurationTime.split(":")[0]);
+          final amountSecondsBk = int.parse(amountCycles.breakDurationTime.split(":")[1]);
+
+          // return CycleRunningScreen(
+          //   amountCycles: amountCycles.cycles,
+          //   amountMinutesEx: amountMinutesEx,
+          //   amountSecondsEx: amountSecondsEx,
+          //   amountMinutesBk: amountMinutesBk,
+          //   amountSecondsBk: amountSecondsBk,
+          // );
         }
       },
     );

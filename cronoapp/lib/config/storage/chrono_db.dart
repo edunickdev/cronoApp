@@ -50,9 +50,6 @@ class DB {
 
     final myData = await myDB.query('customs');
 
-    print(myData);
-    print(myData.length);
-
     return List.generate(
       myData.length,
       (index) => PersonConfig(

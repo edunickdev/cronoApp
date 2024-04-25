@@ -1,18 +1,26 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class CycleRunningScreen extends StatefulWidget {
-  final int amountMinutes;
-  final int amountSeconds;
+  final int amountMinutesEx;
+  final int amountSecondsEx;
+  final int amountMinutesBk;
+  final int amountSecondsBk;
   final int amountCycles;
+
+  final PersonConfig currenConfig;
 
   const CycleRunningScreen({
     Key? key,
-    required this.amountMinutes,
-    required this.amountSeconds,
+    required this.amountMinutesEx,
+    required this.amountSecondsEx,
     required this.amountCycles,
+    required this.amountMinutesBk,
+    required this.amountSecondsBk,
+    required this.currenConfig,
   }) : super(key: key);
 
   @override
@@ -21,18 +29,35 @@ class CycleRunningScreen extends StatefulWidget {
 
 class CycleRunningScreenState extends State<CycleRunningScreen> {
   late int currentCycles;
+  late int currentMinutesEx;
+  late int currentSecondsEx;
+  late int currentMinutesBk;
+  late int currentSecondsBk;
+  final bool currentMode = true;
   final CountDownController _controller = CountDownController();
 
   @override
   void initState() {
     super.initState();
     currentCycles = widget.amountCycles;
+    currentSecondsEx = widget.amountSecondsEx;
+    currentMinutesEx = widget.amountMinutesEx * 60 + currentSecondsBk;
+    currentSecondsBk = widget.amountSecondsBk;
+    currentMinutesBk = widget.amountMinutesBk * 60 + currentSecondsBk;
   }
 
   @override
   Widget build(BuildContext context) {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
+
+    void newConfig() {
+      setState(() {
+        if (currentCycles > 0) {
+          currentCycles = currentCycles - 1;
+        }
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +78,7 @@ class CycleRunningScreenState extends State<CycleRunningScreen> {
                 isReverse: true,
                 width: currentWidth / 2,
                 height: currentHeight * 0.3,
-                duration: 68,
+                duration: currentMinutesEx,
                 textStyle: const TextStyle(fontSize: 30),
                 fillColor: Colors.green,
                 strokeCap: StrokeCap.round,
