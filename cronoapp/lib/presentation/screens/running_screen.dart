@@ -1,9 +1,8 @@
 import 'dart:math';
 
+import 'package:cronoapp/presentation/shared/custom_fab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 
 class CycleRunningScreen extends StatefulWidget {
@@ -51,6 +50,9 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
     final currentWidth = MediaQuery.of(context).size.width;
     final currentHeight = MediaQuery.of(context).size.height;
     final diagonal = sqrt(pow(currentHeight, 2) - pow(currentWidth, 2));
+    final plataforma = Theme.of(context).platform;
+    final theme = Theme.of(context).colorScheme;
+    final cycles = widget.currentConfig.cycles;
 
     void newConfig() {
       setState(() {
@@ -62,13 +64,13 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
       });
     }
 
-    void restartTimer() {
-      _controller.restart();
-    }
-
     return Scaffold(
+      backgroundColor: theme.secondary,
       appBar: AppBar(
-        title: Text(currentMode ? "Ejercítate" : "Descansa"),
+        title: currentCycles > 0
+            ? Text(currentMode ? "Ejercítate" : "Descansa")
+            : const Text("Rutina finalizada"),
+        centerTitle: plataforma == TargetPlatform.android ? true : false,
       ),
       body: Center(
         child: currentCycles > 0
@@ -76,11 +78,19 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Total ciclos: ${widget.currentConfig.cycles > 0 && widget.currentConfig.cycles < 10 ? "0${widget.currentConfig.cycles}" : "${widget.currentConfig.cycles}"}",
-                    style: TextStyle(fontSize: diagonal * 0.03),
+                    "Total ciclos: ${cycles > 0 && cycles < 10 ? "0$cycles" : "$cycles"}",
+                    style: TextStyle(
+                      fontSize: diagonal * 0.03,
+                      color: theme.secondaryContainer,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text("Ciclos completados: $totalCyclesCompleted",
-                      style: TextStyle(fontSize: diagonal * 0.03)),
+                      style: TextStyle(
+                        fontSize: diagonal * 0.03,
+                        color: theme.secondaryContainer,
+                        fontWeight: FontWeight.bold,
+                      )),
                   CircularCountDownTimer(
                     key: UniqueKey(),
                     controller: _controller,
@@ -100,45 +110,44 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
                     width: currentWidth / 2,
                     height: currentHeight * 0.3,
                     duration: currentMode ? currentMinutesEx : currentMinutesBk,
-                    textStyle: const TextStyle(fontSize: 30),
-                    fillColor: Colors.green,
+                    textStyle: TextStyle(
+                      fontSize: diagonal * 0.05,
+                      fontWeight: FontWeight.bold,
+                      color: theme.secondaryContainer,
+                    ),
+                    fillColor: currentMode ? Colors.green : Colors.blue,
                     strokeCap: StrokeCap.round,
-                    strokeWidth: 15,
-                    ringColor: Colors.grey,
+                    strokeWidth: 22,
+                    ringColor: theme.secondaryContainer,
                   ),
                   SizedBox(height: currentWidth / 6),
                 ],
               )
-            : const Text(
-                "¡Felicidades! Has terminado",
-                style: TextStyle(fontSize: 25),
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Excelente trabajo",
+                    style: TextStyle(
+                      fontSize: diagonal * 0.035,
+                      fontWeight: FontWeight.bold,
+                      color: theme.secondaryContainer,
+                    ),
+                  ),
+                  Text(
+                    "¡Felicidades! Has terminado",
+                    style: TextStyle(
+                      fontSize: diagonal * 0.035,
+                      fontWeight: FontWeight.bold,
+                      color: theme.secondaryContainer,
+                    ),
+                  ),
+                ],
               ),
       ),
-      floatingActionButton: FadeInLeft(
-        child: SpeedDial(
-          childPadding: const EdgeInsets.symmetric(vertical: 3),
-          overlayOpacity: 0,
-          animatedIcon: AnimatedIcons.menu_arrow,
-          closeManually: true,
-          children: [
-            SpeedDialChild(
-              child: const Icon(Icons.play_arrow_rounded),
-              label: "Iniciar",
-              onTap: () => _controller.resume(),
-            ),
-            SpeedDialChild(
-              child: const Icon(Icons.pause_rounded),
-              label: "Pausar",
-              onTap: () => _controller.pause(),
-            ),
-            SpeedDialChild(
-              child: const Icon(Icons.refresh),
-              label: "Reiniciar",
-              onTap: restartTimer,
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton:
+          currentCycles > 0 ? CustomFABWidget(controller: _controller) : null,
     );
   }
 }

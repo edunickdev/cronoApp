@@ -38,8 +38,7 @@ class MyApp extends ConsumerWidget {
                   return FadeInUp(
                     duration: const Duration(milliseconds: 500),
                     child: FloatingActionButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed("/cicles"),
+                      onPressed: () => Navigator.of(context).pushNamed("/cicles"),
                       child: const Icon(Icons.play_arrow_rounded),
                     ),
                   );
