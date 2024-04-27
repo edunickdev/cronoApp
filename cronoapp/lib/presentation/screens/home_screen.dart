@@ -17,6 +17,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final double totalHeight = MediaQuery.of(context).size.height;
+    final theme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
@@ -27,7 +28,7 @@ class HomeScreen extends ConsumerWidget {
                 child: const MainChronometer(),
               ),
               Container(
-                color: Colors.grey[300],
+                color: theme.inverseSurface,
                 height: totalHeight * 0.42,
                 child: const TimersWidget(),
               ),

@@ -31,7 +31,7 @@ class SectionCyclesWidget extends ConsumerWidget {
               width: myConstrains.maxWidth * 0.5,
               height: myConstrains.maxHeight * 0.25,
               // color: Colors.blue[200],
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(2),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +100,7 @@ class SectionCyclesWidget extends ConsumerWidget {
         ),
         Container(
             width: myConstrains.maxWidth * 0.3,
-            height: myConstrains.maxHeight * 0.25,
+            height: myConstrains.maxHeight * 0.30,
             // color: Colors.red[200],
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SingleChildScrollView(

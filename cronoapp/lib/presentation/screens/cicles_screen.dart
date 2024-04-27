@@ -24,8 +24,7 @@ class CiclesScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.045),
-              Text("Ciclos", style: TextStyle(fontSize: diagonal * 0.06)),
+              Text("Configuración de ciclos", style: TextStyle(fontSize: diagonal * 0.04)),
               const Divider(),
               SectionCyclesWidget(
                   myConstrains: constraints, title: MyOptions.exercise),

@@ -90,6 +90,8 @@ class CustomField extends ConsumerWidget {
       Navigator.of(context).pop();
     }
 
+    final theme = Theme.of(context).colorScheme;
+
     return InkWell(
       onTap: () {
         showDialog(
@@ -126,7 +128,7 @@ class CustomField extends ConsumerWidget {
               ? "HH"
               : text == "Minutos"
                   ? "MM"
-                  : "SS"),
+                  : "SS", style: TextStyle(color: theme.inversePrimary),),
           Text(
             value.length == 1 ? "0$value" : value,
             style: TextStyle(
@@ -134,8 +136,8 @@ class CustomField extends ConsumerWidget {
               color: ref.read(mainHours.notifier).state != "00" &&
                       ref.read(mainMinutes.notifier).state != "00" &&
                       ref.read(mainSeconds.notifier).state != "00"
-                  ? Colors.black
-                  : Colors.red[400],
+                  ? theme.inversePrimary
+                  : theme.secondaryContainer,
             ),
           ),
         ],
