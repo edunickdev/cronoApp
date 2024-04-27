@@ -1,3 +1,4 @@
+import 'package:cronoapp/config/theme/custom_theme.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:cronoapp/presentation/screens/running_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +23,33 @@ class MyApp extends ConsumerWidget {
     List<Widget> screens = [const HomeScreen(), const CiclesScreen()];
     final int currentScreen = ref.watch(selectScreen);
     final showBtn = ref.watch(showButton);
+    final currentBrightness = ref.read(myBrightness.notifier).state;
+    final currentTheme = ref.read(myTheme.notifier).state;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CronoApp',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.amber[600]),
-      darkTheme: ThemeData.dark(),
+      theme: CustomTheme(
+        selectedColor: currentTheme,
+        brightness: currentBrightness,
+      ).changeColor(),
       home: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: currentBrightness
+                  ? const Icon(Icons.sunny)
+                  : const Icon(Icons.dark_mode),
+            ),
+            IconButton(
+              onPressed: () {
+                ref.read(myTheme.notifier).state = 4;
+              },
+              icon: const Icon(Icons.color_lens_rounded),
+            )
+          ],
+        ),
         body: screens[currentScreen],
         bottomNavigationBar: const CustomNavBarWidget(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -38,7 +59,8 @@ class MyApp extends ConsumerWidget {
                   return FadeInUp(
                     duration: const Duration(milliseconds: 500),
                     child: FloatingActionButton(
-                      onPressed: () => Navigator.of(context).pushNamed("/cicles"),
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed("/cicles"),
                       child: const Icon(Icons.play_arrow_rounded),
                     ),
                   );

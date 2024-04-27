@@ -71,6 +71,12 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
             ? Text(currentMode ? "Ejercítate" : "Descansa")
             : const Text("Rutina finalizada"),
         centerTitle: plataforma == TargetPlatform.android ? true : false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.menu),
+          )
+        ],
       ),
       body: Center(
         child: currentCycles > 0

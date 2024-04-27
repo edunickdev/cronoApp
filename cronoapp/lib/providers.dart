@@ -35,3 +35,5 @@ final currentConfig = StateProvider<PersonConfig>(
 );
 
 final showButton = StateProvider<bool>((ref) => false);
+final myBrightness = StateProvider<bool>((ref) => true);
+final myTheme = StateProvider<int>((ref) => 8);

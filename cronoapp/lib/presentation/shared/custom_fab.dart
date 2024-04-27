@@ -25,7 +25,9 @@ class CustomFABWidget extends StatelessWidget {
         closeManually: true,
         children: [
           SpeedDialChild(
-            child: const Icon(Icons.play_arrow_rounded),
+            child: const Icon(
+              Icons.play_arrow_rounded,
+            ),
             label: "Iniciar",
             onTap: () => _controller.resume(),
           ),
