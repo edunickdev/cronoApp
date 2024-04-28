@@ -1,8 +1,6 @@
 import 'dart:async';
+import 'package:cronoapp/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../providers.dart';
-
 
 void startTimeChronometer(WidgetRef ref) {
   if (ref.watch(mainIsRunning.notifier).state) {
@@ -32,7 +30,8 @@ void startTimeChronometer(WidgetRef ref) {
           }
         }
       }
-      ref.read(mainmiliSeconds.notifier).state = miliseconds.toString().padLeft(2, '0');
+      ref.read(mainmiliSeconds.notifier).state =
+          miliseconds.toString().padLeft(2, '0');
       ref.read(mainSeconds.notifier).state = seconds.toString().padLeft(2, '0');
       ref.read(mainMinutes.notifier).state = minutes.toString().padLeft(2, '0');
       ref.read(mainHours.notifier).state = hours.toString().padLeft(2, '0');

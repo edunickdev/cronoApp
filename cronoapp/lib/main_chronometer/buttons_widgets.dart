@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cronoapp/config/helpers/shared/shared_functions.dart';
 import 'package:cronoapp/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,15 +11,6 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void resetTime(Timer timer) {
-      timer.cancel();
-      ref.read(mainIsRunning.notifier).state = false;
-      ref.read(mainHours.notifier).state = "00";
-      ref.read(mainMinutes.notifier).state = "00";
-      ref.read(mainSeconds.notifier).state = "00";
-      ref.read(mainmiliSeconds.notifier).state = "00";
-    }
-
     void startTimeCountDown() {
       if (ref.watch(mainMode) == false &&
           ref.watch(mainHours) == "00" &&
@@ -110,11 +102,6 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
       );
     }
 
-    void pauseTime() {
-      timer.cancel();
-      ref.read(mainIsRunning.notifier).state = false;
-    }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -130,7 +117,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
                 startTimeChronometer();
               }
             } else {
-              pauseTime();
+              pauseTime(ref, timer);
             }
           },
           child: Padding(
@@ -150,7 +137,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.blue),
           ),
-          onPressed: () => resetTime(timer),
+          onPressed: () => resetTime(ref, timer),
           child: const Padding(
             padding: EdgeInsets.all(5),
             child: Icon(

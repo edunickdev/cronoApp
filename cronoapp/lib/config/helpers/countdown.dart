@@ -3,21 +3,21 @@ import 'dart:async';
 import 'package:cronoapp/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-Timer startTimeCountDown(WidgetRef ref, Timer timer) {
+void startTimeCountDown(WidgetRef ref) {
   if (ref.watch(mainMode) == false &&
       ref.watch(mainHours) == "00" &&
       ref.watch(mainMinutes) == "00" &&
       ref.watch(mainSeconds) == "00" &&
       ref.watch(mainmiliSeconds) == "00") {
-    return timer;
+    return;
   }
 
   if (ref.watch(mainIsRunning.notifier).state) {
-    return timer;
+    return;
   }
   ref.read(mainIsRunning.notifier).state = true;
 
-  timer = Timer.periodic(
+  Timer.periodic(
     const Duration(seconds: 1),
     (timer) {
       int miliseconds = int.parse(ref.read(mainmiliSeconds.notifier).state);
@@ -57,6 +57,4 @@ Timer startTimeCountDown(WidgetRef ref, Timer timer) {
       }
     },
   );
-
-  return timer;
 }
