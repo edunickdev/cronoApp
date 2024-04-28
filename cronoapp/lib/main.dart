@@ -18,7 +18,7 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool brightness = prefs.getBool('brightness') ?? true;
   final int theme = prefs.getInt('theme') ?? 0;
-  runApp(ProviderScope( overrides: [
+  runApp(ProviderScope(overrides: [
     myBrightness.overrideWith((ref) => brightness),
     myTheme.overrideWith((ref) => theme)
   ], child: const MyApp()));
@@ -75,11 +75,12 @@ class MyApp extends ConsumerWidget {
                 "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
 
             myData = PersonConfig(
-                id: 0,
-                title: "default",
-                exerciseDurationTime: timeExercise,
-                breakDurationTime: timeBreak,
-                cycles: ref.read(cyclesAmount.notifier).state);
+              id: 0,
+              title: "default",
+              exerciseDurationTime: timeExercise,
+              breakDurationTime: timeBreak,
+              cycles: ref.read(cyclesAmount.notifier).state,
+            );
           }
 
           return CycleRunningScreen(currentConfig: myData);
@@ -88,4 +89,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-

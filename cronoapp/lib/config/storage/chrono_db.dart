@@ -51,14 +51,14 @@ class DB {
     final myData = await myDB.query('customs');
 
     return List.generate(
-      myData.length,
-      (index) => PersonConfig(
-        id: myData[index]['id'] as int,
-        title: myData[index]['title'] as String, 
-        exerciseDurationTime: myData[index]['exerciseDurationTime'] as String, 
-        breakDurationTime: myData[index]['breakDurationTime'] as String, 
-        cycles: myData[index]['cycles'] as int,
-      )
-    );
+        myData.length,
+        (index) => PersonConfig(
+              id: myData[index]['id'] as int,
+              title: myData[index]['title'] as String,
+              exerciseDurationTime:
+                  myData[index]['exerciseDurationTime'] as String,
+              breakDurationTime: myData[index]['breakDurationTime'] as String,
+              cycles: myData[index]['cycles'] as int,
+            ));
   }
 }

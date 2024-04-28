@@ -11,13 +11,16 @@ PreferredSizeWidget mainAppBarWidget(BuildContext context, WidgetRef ref) {
     actions: [
       IconButton(
         onPressed: () async {
+          if (ref.watch(mainIsRunning.notifier).state) {
+            return;
+          }
           ref.read(myBrightness.notifier).state = !currentBrightness;
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setBool('brightness', !currentBrightness);
         },
         icon: currentBrightness
-            ? const Icon(Icons.sunny)
-            : const Icon(Icons.dark_mode),
+            ? const Icon(Icons.dark_mode_rounded)
+            : const Icon(Icons.sunny),
       ),
       PopupMenuButton<int>(
         icon: const Icon(Icons.color_lens),
@@ -36,6 +39,9 @@ PreferredSizeWidget mainAppBarWidget(BuildContext context, WidgetRef ref) {
           }).toList();
         },
         onSelected: (value) async {
+          if (ref.watch(mainIsRunning.notifier).state) {
+            return;
+          }
           ref.read(myTheme.notifier).state = value;
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setInt('theme', value);

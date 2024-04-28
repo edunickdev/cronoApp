@@ -39,6 +39,9 @@ class CustomNavBarWidget extends ConsumerWidget {
       height: diagonal * 0.13,
       selectedIndex: currentIndex,
       onDestinationSelected: (value) {
+        if (ref.watch(mainIsRunning.notifier).state) {
+          return;
+        }
         ref.read(selectScreen.notifier).state = value;
         ref.watch(selectScreen) == 0 ? resetValues(ref) : null;
       },

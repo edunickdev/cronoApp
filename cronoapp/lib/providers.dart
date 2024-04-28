@@ -20,7 +20,7 @@ final objectCycles = StateProvider<List<List<int>>>((ref) => []);
 final totalBreakTime = StateProvider<int>((ref) => 0);
 final totalExerciseTime = StateProvider<int>((ref) => 0);
 
-final configSelected = StateProvider<int>((ref) => 1);
+final configSelected = StateProvider<int>((ref) => 0);
 final myConfigList = StateProvider<List<String>?>((ref) => []);
 final titleConfig = StateProvider((ref) => "");
 
@@ -37,3 +37,5 @@ final currentConfig = StateProvider<PersonConfig>(
 final showButton = StateProvider<bool>((ref) => false);
 final myBrightness = StateProvider<bool>((ref) => true);
 final myTheme = StateProvider<int>((ref) => 8);
+
+final myDataProvider = StateProvider<List<PersonConfig>>((ref) => []);
