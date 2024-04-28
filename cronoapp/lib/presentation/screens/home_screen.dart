@@ -20,24 +20,22 @@ class HomeScreen extends ConsumerWidget {
     final theme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: totalHeight * 0.2,
-                child: const MainChronometer(),
-              ),
-              Container(
-                color: theme.inverseSurface,
-                height: totalHeight * 0.42,
-                child: const TimersWidget(),
-              ),
-              SizedBox(
-                height: totalHeight * 0.2,
-                child: MainCronometerButtonsWidget(),
-              ),
-            ],
-          ),
+        return Column(
+          children: [
+            SizedBox(
+              height: totalHeight * 0.2,
+              child: const MainChronometer(),
+            ),
+            Container(
+              color: theme.inverseSurface,
+              height: totalHeight * 0.4,
+              child: const TimersWidget(),
+            ),
+            SizedBox(
+              height: totalHeight * 0.15,
+              child: MainCronometerButtonsWidget(),
+            ),
+          ],
         );
       },
     );
@@ -103,7 +101,8 @@ class MainCronometerWidget extends ConsumerWidget {
                     actions: [
                       IconButton(
                         onPressed: () {
-                          ref.read(objectCycles.notifier).state = createCycles();
+                          ref.read(objectCycles.notifier).state =
+                              createCycles();
                           context.pop();
                         },
                         icon: const Icon(Icons.save, size: 40),

@@ -26,110 +26,129 @@ class SectionCyclesWidget extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: myConstrains.maxWidth * 0.5,
-              height: myConstrains.maxHeight * 0.25,
-              // color: Colors.blue[200],
-              padding: const EdgeInsets.all(2),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      title == MyOptions.exercise ? "Ejercicio" : "Descanso",
-                      style: const TextStyle(fontSize: 30),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          title == MyOptions.exercise
-                              ? currentEMinutes.length == 1
-                                  ? "0$currentEMinutes"
-                                  : currentEMinutes
-                              : currentBMinutes.length == 1
-                                  ? "0$currentBMinutes"
-                                  : currentBMinutes,
-                          style:
-                              TextStyle(fontSize: myConstrains.maxHeight * 0.08),
-                        ),
-                        Text(
-                          ":",
-                          style:
-                              TextStyle(fontSize: myConstrains.maxHeight * 0.08),
-                        ),
-                        Text(
-                          title == MyOptions.exercise
-                              ? currentESeconds.length == 1
-                                  ? "0$currentESeconds"
-                                  : currentESeconds
-                              : currentBSeconds.length == 1
-                                  ? "0$currentBSeconds"
-                                  : currentBSeconds,
-                          style:
-                              TextStyle(fontSize: myConstrains.maxHeight * 0.08),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FilledButton(
-                          onPressed: () => title == MyOptions.exercise
-                              ? moreSecondsExercise(ref)
-                              : moreSecondsBreak(ref),
-                          child: const Icon(Icons.plus_one),
-                        ),
-                        const SizedBox(width: 5),
-                        FilledButton(
-                          onPressed: () => title == MyOptions.exercise
-                              ? lessSecondsExercise(ref)
-                              : lessSecondsBreak(ref),
-                          child: const Icon(Icons.exposure_minus_1),
-                        ),
-                      ],
-                    ),
-                  ],
+            Text(
+              title == MyOptions.exercise ? "Ejercicio" : "Descanso",
+              style: TextStyle(fontSize: myConstrains.maxHeight * 0.03),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  title == MyOptions.exercise
+                      ? currentEMinutes.length == 1
+                          ? "0$currentEMinutes"
+                          : currentEMinutes
+                      : currentBMinutes.length == 1
+                          ? "0$currentBMinutes"
+                          : currentBMinutes,
+                  style: TextStyle(fontSize: myConstrains.maxHeight * 0.07),
                 ),
-              ),
+                Text(
+                  ":",
+                  style: TextStyle(fontSize: myConstrains.maxHeight * 0.07),
+                ),
+                Text(
+                  title == MyOptions.exercise
+                      ? currentESeconds.length == 1
+                          ? "0$currentESeconds"
+                          : currentESeconds
+                      : currentBSeconds.length == 1
+                          ? "0$currentBSeconds"
+                          : currentBSeconds,
+                  style: TextStyle(fontSize: myConstrains.maxHeight * 0.07),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  style: ButtonStyle(
+                    fixedSize: MaterialStatePropertyAll(
+                      Size(
+                        myConstrains.maxWidth * 0.02,
+                        myConstrains.maxHeight * 0.01,
+                      ),
+                    ),
+                  ),
+                  onPressed: () => title == MyOptions.exercise
+                      ? moreSecondsExercise(ref)
+                      : moreSecondsBreak(ref),
+                  child: const Icon(Icons.plus_one),
+                ),
+                SizedBox(width: myConstrains.maxWidth * 0.012),
+                FilledButton(
+                  style: ButtonStyle(
+                    fixedSize: MaterialStatePropertyAll(
+                      Size(
+                        myConstrains.maxWidth * 0.02,
+                        myConstrains.maxHeight * 0.01,
+                      ),
+                    ),
+                  ),
+                  onPressed: () => title == MyOptions.exercise
+                      ? lessSecondsExercise(ref)
+                      : lessSecondsBreak(ref),
+                  child: const Icon(Icons.exposure_minus_1),
+                ),
+              ],
             ),
           ],
         ),
-        Container(
-            width: myConstrains.maxWidth * 0.3,
-            height: myConstrains.maxHeight * 0.30,
-            // color: Colors.red[200],
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () => title == MyOptions.exercise
-                          ? resetTimers(ref, MyOptions.exercise)
-                          : resetTimers(ref, MyOptions.breaks),
-                      child: const Icon(Icons.refresh_rounded)),
-                  FilledButton.tonal(
-                      onPressed: () => title == MyOptions.exercise
-                          ? plusTenExercise(ref)
-                          : plusTenBreak(ref),
-                      child: const Text("+10")),
-                  FilledButton.tonal(
-                      onPressed: () => title == MyOptions.exercise
-                          ? plusFifteenExercise(ref)
-                          : plusFifteenBreak(ref),
-                      child: const Text("+15")),
-                  FilledButton.tonal(
-                      onPressed: () => title == MyOptions.exercise
-                          ? plusThirtyExercise(ref)
-                          : plusThirtyBreak(ref),
-                      child: const Text("+30")),
-                ],
-              ),
-            ))
+        SizedBox(width: myConstrains.maxWidth * 0.04),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => title == MyOptions.exercise
+                      ? resetTimers(ref, MyOptions.exercise)
+                      : resetTimers(ref, MyOptions.breaks),
+                  child: Icon(
+                    Icons.refresh_rounded,
+                    size: myConstrains.maxHeight * 0.04,
+                  ),
+                ),
+                FilledButton.tonal(
+                    onPressed: () => title == MyOptions.exercise
+                        ? plusTenExercise(ref)
+                        : plusTenBreak(ref),
+                    child: Text(
+                      "+10",
+                      style: TextStyle(fontSize: myConstrains.maxHeight * 0.02),
+                    )),
+              ],
+            ),
+            SizedBox(width: myConstrains.maxWidth * 0.01),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton.tonal(
+                    onPressed: () => title == MyOptions.exercise
+                        ? plusFifteenExercise(ref)
+                        : plusFifteenBreak(ref),
+                    child: Text(
+                      "+15",
+                      style: TextStyle(fontSize: myConstrains.maxHeight * 0.02),
+                    )),
+                FilledButton.tonal(
+                    onPressed: () => title == MyOptions.exercise
+                        ? plusThirtyExercise(ref)
+                        : plusThirtyBreak(ref),
+                    child: Text(
+                      "+30",
+                      style: TextStyle(fontSize: myConstrains.maxHeight * 0.02),
+                    ))
+              ],
+            )
+          ],
+        )
       ],
     );
   }

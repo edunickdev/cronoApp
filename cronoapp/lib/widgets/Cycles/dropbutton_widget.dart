@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DropButtonWidget extends ConsumerWidget {
-  const DropButtonWidget({super.key});
+  final BoxConstraints myConstrains;
+
+  const DropButtonWidget({super.key, required this.myConstrains});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<PersonConfig> myData = ref.watch(myDataProvider);
-    final width = MediaQuery.of(context).size.width;
     final selected = ref.watch(configSelected);
     final theme = Theme.of(context).buttonTheme.colorScheme;
 
@@ -18,47 +19,58 @@ class DropButtonWidget extends ConsumerWidget {
       future: getConfigs(ref),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return const CircularProgressIndicator();
+          return SizedBox(
+              width: myConstrains.maxWidth / 2,
+              child: const CircularProgressIndicator());
         } else {
           myData = snapshot.data!;
           if (myData.isEmpty) {
             return SizedBox(
-              width: width / 2,
-              child: const Center(
-                child: Text("No existen datos guardados"),
+              width: myConstrains.maxWidth / 2,
+              child: Text(
+                "No existen datos guardados",
+                style: TextStyle(fontSize: myConstrains.maxWidth * 0.03),
+                textAlign: TextAlign.center,
               ),
             );
           } else {
             return SizedBox(
-              width: width / 2,
+              height: myConstrains.maxHeight * 0.07,
+              width: myConstrains.maxWidth / 2,
               child: PopupMenuButton(
                 color: theme!.inversePrimary,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadiusDirectional.all(
-                      Radius.elliptical(10, 10),
+                      Radius.elliptical(15, 15),
                     ),
                     color: theme.primary,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            myData[selected].title,
-                            style: TextStyle(
-                              color: theme.surface,
-                              fontSize: 16,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: myConstrains.maxWidth * 0.02,
+                    ),
+                    child: SizedBox(
+                      height: myConstrains.maxHeight * 0.07,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              myData[selected].title,
+                              style: TextStyle(
+                                color: theme.surface,
+                                fontSize: myConstrains.maxWidth * 0.04,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                        ),
-                      ],
+                          const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

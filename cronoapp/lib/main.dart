@@ -1,15 +1,15 @@
-import 'package:cronoapp/config/theme/custom_theme.dart';
-import 'package:cronoapp/domain/entities/person_model.dart';
-import 'package:cronoapp/presentation/screens/running_screen.dart';
-import 'package:cronoapp/presentation/shared/main_navbar.dart';
-import 'package:flutter/material.dart';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import 'package:cronoapp/config/theme/custom_theme.dart';
+import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:cronoapp/presentation/screens/cicles_screen.dart';
 import 'package:cronoapp/presentation/screens/home_screen.dart';
+import 'package:cronoapp/presentation/screens/running_screen.dart';
 import 'package:cronoapp/presentation/shared/custom_navbar.dart';
+import 'package:cronoapp/presentation/shared/main_navbar.dart';
 import 'package:cronoapp/providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,6 +34,10 @@ class MyApp extends ConsumerWidget {
     final showBtn = ref.watch(showButton);
     final currentBrightness = ref.watch(myBrightness);
     final currentTheme = ref.watch(myTheme);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -43,6 +47,7 @@ class MyApp extends ConsumerWidget {
         brightness: currentBrightness,
       ).changeColor(),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: mainAppBarWidget(context, ref),
         body: screens[currentScreen],
         bottomNavigationBar: const CustomNavBarWidget(),

@@ -39,17 +39,23 @@ class TimersWidget extends ConsumerWidget {
                           : Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("HH", style: TextStyle(color: theme.inversePrimary)),
+                                Text("HH",
+                                    style:
+                                        TextStyle(color: theme.inversePrimary)),
                                 Text(
                                   hours,
                                   style: TextStyle(
-                                      fontSize: currentDiagonal * 0.1, color: theme.inversePrimary),
+                                      fontSize: currentDiagonal * 0.1,
+                                      color: theme.inversePrimary),
                                 ),
                               ],
                             );
                     },
                   ),
-                  Text(":", style: TextStyle(fontSize: currentDiagonal * 0.05, color: theme.inversePrimary)),
+                  Text(":",
+                      style: TextStyle(
+                          fontSize: currentDiagonal * 0.05,
+                          color: theme.inversePrimary)),
                   Consumer(builder: (context, ref, child) {
                     String minutes = ref.watch(mainMinutes);
                     return ref.read(mainMode.notifier).state == false
@@ -60,14 +66,20 @@ class TimersWidget extends ConsumerWidget {
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("MM", style: TextStyle(color: theme.inversePrimary)),
+                              Text("MM",
+                                  style:
+                                      TextStyle(color: theme.inversePrimary)),
                               Text(minutes,
                                   style: TextStyle(
-                                      fontSize: currentDiagonal * 0.1, color: theme.inversePrimary)),
+                                      fontSize: currentDiagonal * 0.1,
+                                      color: theme.inversePrimary)),
                             ],
                           );
                   }),
-                  Text(":", style: TextStyle(fontSize: currentDiagonal * 0.05, color: theme.inversePrimary)),
+                  Text(":",
+                      style: TextStyle(
+                          fontSize: currentDiagonal * 0.05,
+                          color: theme.inversePrimary)),
                   Consumer(builder: (context, ref, child) {
                     String seconds = ref.watch(mainSeconds);
                     return ref.read(mainMode.notifier).state == false
@@ -100,7 +112,9 @@ class TimersWidget extends ConsumerWidget {
                 String miliseconds = ref.watch(mainmiliSeconds);
                 return Text(
                   miliseconds.length == 1 ? "0$miliseconds" : miliseconds,
-                  style: TextStyle(fontSize: 90, color: theme.inversePrimary),
+                  style: TextStyle(
+                      fontSize: currentDiagonal * 0.1,
+                      color: theme.inversePrimary),
                 );
               },
             ),
