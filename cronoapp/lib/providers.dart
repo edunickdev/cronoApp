@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -39,3 +41,4 @@ final myBrightness = StateProvider<bool>((ref) => true);
 final myTheme = StateProvider<int>((ref) => 8);
 
 final myDataProvider = StateProvider<List<PersonConfig>>((ref) => []);
+final myTimer = StateProvider<Timer>((ref) => Timer(const Duration(), () {}));

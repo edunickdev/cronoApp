@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers.dart';
+import 'package:cronoapp/providers.dart';
 
 Timer resetTime(WidgetRef ref, Timer timer) {
   timer.cancel();
@@ -15,7 +14,7 @@ Timer resetTime(WidgetRef ref, Timer timer) {
   return timer;
 }
 
-Timer pauseTime(WidgetRef ref,  Timer timer) {
+Timer pauseTime(WidgetRef ref, Timer timer) {
   timer.cancel();
   ref.read(mainIsRunning.notifier).state = false;
   return timer;

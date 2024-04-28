@@ -1,8 +1,10 @@
 import 'dart:math';
-import 'package:cronoapp/main_chronometer/main_chronometer.dart';
-import 'package:cronoapp/providers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:cronoapp/providers.dart';
+import 'package:cronoapp/widgets/home/custom_field.dart';
 
 class TimersWidget extends ConsumerWidget {
   const TimersWidget({super.key});
@@ -113,8 +115,9 @@ class TimersWidget extends ConsumerWidget {
                 return Text(
                   miliseconds.length == 1 ? "0$miliseconds" : miliseconds,
                   style: TextStyle(
-                      fontSize: currentDiagonal * 0.1,
-                      color: theme.inversePrimary),
+                    fontSize: currentDiagonal * 0.1,
+                    color: theme.inversePrimary,
+                  ),
                 );
               },
             ),

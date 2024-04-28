@@ -1,13 +1,12 @@
+import 'package:cronoapp/cicles_chronometer/circular_chronometer.dart';
 import 'package:cronoapp/cicles_chronometer/duration_cicles.dart';
+import 'package:cronoapp/main_chronometer/buttons_widgets.dart';
+import 'package:cronoapp/main_chronometer/main_chronometer.dart';
 import 'package:cronoapp/main_chronometer/timers_widget.dart';
+import 'package:cronoapp/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../cicles_chronometer/circular_chronometer.dart';
-import '../../main_chronometer/buttons_widgets.dart';
-import '../../main_chronometer/main_chronometer.dart';
-import '../../providers.dart';
 
 class HomeScreen extends ConsumerWidget {
   static const name = "/";
