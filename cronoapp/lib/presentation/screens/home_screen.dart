@@ -16,23 +16,22 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double totalHeight = MediaQuery.of(context).size.height;
     final theme = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
           children: [
             SizedBox(
-              height: totalHeight * 0.2,
+              height: constraints.maxHeight * 0.2,
               child: const MainChronometer(),
             ),
             Container(
               color: theme.inverseSurface,
-              height: totalHeight * 0.4,
+              height: constraints.maxHeight * 0.6,
               child: const TimersWidget(),
             ),
             SizedBox(
-              height: totalHeight * 0.15,
+              height: constraints.maxHeight * 0.2,
               child: MainCronometerButtonsWidget(),
             ),
           ],

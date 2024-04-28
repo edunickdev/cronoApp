@@ -19,9 +19,7 @@ class DropButtonWidget extends ConsumerWidget {
       future: getConfigs(ref),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return SizedBox(
-              width: myConstrains.maxWidth / 2,
-              child: const CircularProgressIndicator());
+          return const CircularProgressIndicator();
         } else {
           myData = snapshot.data!;
           if (myData.isEmpty) {
