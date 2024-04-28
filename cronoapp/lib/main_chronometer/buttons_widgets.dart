@@ -5,19 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // ignore: must_be_immutable
 class MainCronometerButtonsWidget extends ConsumerWidget {
-  late Timer timer;
-  MainCronometerButtonsWidget({super.key});
-
-  onInit(WidgetRef ref) {
-    ref.read(mainHours.notifier).state = "00";
-    ref.read(mainMinutes.notifier).state = "00";
-    ref.read(mainSeconds.notifier).state = "00";
-    ref.read(mainmiliSeconds.notifier).state = "00";
-  }
+  Timer timer;
+  MainCronometerButtonsWidget({super.key, required this.timer});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void resetTime() {
+    void resetTime(Timer timer) {
       timer.cancel();
       ref.read(mainIsRunning.notifier).state = false;
       ref.read(mainHours.notifier).state = "00";
@@ -157,7 +150,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.blue),
           ),
-          onPressed: resetTime,
+          onPressed: () => resetTime(timer),
           child: const Padding(
             padding: EdgeInsets.all(5),
             child: Icon(

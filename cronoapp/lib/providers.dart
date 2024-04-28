@@ -41,4 +41,6 @@ final myBrightness = StateProvider<bool>((ref) => true);
 final myTheme = StateProvider<int>((ref) => 8);
 
 final myDataProvider = StateProvider<List<PersonConfig>>((ref) => []);
-final myTimer = StateProvider<Timer>((ref) => Timer(const Duration(), () {}));
+final myTimer = StateProvider<Timer>(
+  (ref) => Timer(const Duration(seconds: 1), () {}),
+);

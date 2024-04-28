@@ -16,6 +16,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context).colorScheme;
+    final currentTime = ref.watch(myTimer);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Column(
@@ -31,7 +32,7 @@ class HomeScreen extends ConsumerWidget {
             ),
             SizedBox(
               height: constraints.maxHeight * 0.2,
-              child: MainCronometerButtonsWidget(),
+              child: MainCronometerButtonsWidget(timer: currentTime),
             ),
           ],
         );
