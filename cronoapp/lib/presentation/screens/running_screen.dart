@@ -1,7 +1,8 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:cronoapp/presentation/shared/custom_fab.dart';
-import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 
@@ -27,6 +28,7 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
   bool currentMode = true;
   int totalCyclesCompleted = 0;
   final CountDownController _controller = CountDownController();
+  final player = AudioPlayer();
 
   @override
   void initState() {
@@ -64,6 +66,12 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
       });
     }
 
+    Future<void> playSound(bool mode) async {
+      String soundPath1 = "sounds/sonido1.mp3";
+      String soundPath2 = "sounds/sonido2.mp3";
+      await player.play(AssetSource(mode ? soundPath1 : soundPath2));
+    }
+
     return Scaffold(
       backgroundColor: theme.secondary,
       appBar: AppBar(
@@ -95,7 +103,9 @@ class _CycleRunningScreenState extends State<CycleRunningScreen> {
                     key: UniqueKey(),
                     controller: _controller,
                     onChange: (value) {
-                      // TODO: Función que dispara el sonido
+                      if (value == "6") {
+                        playSound(currentMode);
+                      }
                     },
                     onComplete: () {
                       newConfig();
