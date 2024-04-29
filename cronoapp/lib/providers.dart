@@ -38,9 +38,9 @@ final currentConfig = StateProvider<PersonConfig>(
 
 final showButton = StateProvider<bool>((ref) => false);
 final myBrightness = StateProvider<bool>((ref) => true);
-final myTheme = StateProvider<int>((ref) => 8);
+final myTheme = StateProvider<int>((ref) => 4);
 
 final myDataProvider = StateProvider<List<PersonConfig>>((ref) => []);
 final myTimer = StateProvider<Timer>(
-  (ref) => Timer(const Duration(seconds: 1), () {}),
+  (ref) => Timer.periodic(const Duration(milliseconds: 5), (timer) {}),
 );
