@@ -1,4 +1,4 @@
-package com.example.cronoapp
+package com.nickdevecr.cronoapp
 
 import io.flutter.embedding.android.FlutterActivity
 
