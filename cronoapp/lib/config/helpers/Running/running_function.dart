@@ -20,40 +20,39 @@ Future<SnackBar> resultSnackbar(WidgetRef ref) async {
   return snackResponse;
 }
 
-
 Future<void> setTitleConfig(BuildContext ctx, WidgetRef ref) async {
-      final TextEditingController title = TextEditingController();
-      final theme = Theme.of(ctx).buttonTheme.colorScheme;
+  final TextEditingController title = TextEditingController();
+  final theme = Theme.of(ctx).buttonTheme.colorScheme;
 
-      await showDialog(
-        context: ctx,
-        builder: (ctx) {
-          return AlertDialog(
-            title: const Text("Título de configuración"),
-            content: TextField(
-              controller: title,
-              decoration: const InputDecoration(
-                  hintText: "Ingresa el título de tu configuración."),
+  await showDialog(
+    context: ctx,
+    builder: (ctx) {
+      return AlertDialog(
+        title: const Text("Título de configuración"),
+        content: TextField(
+          controller: title,
+          decoration: const InputDecoration(
+            hintText: "Ingresa el título de tu configuración.",
+          ),
+        ),
+        actions: [
+          TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(theme!.inversePrimary),
             ),
-            actions: [
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStatePropertyAll(theme!.inversePrimary),
-                ),
-                child: const Text('Aceptar'),
-                onPressed: () {
-                  String inputValue = title.text;
-                  ref.read(titleConfig.notifier).state = inputValue;
-                  Navigator.pop(ctx);
-                },
-              ),
-            ],
-          );
-        },
+            child: const Text('Aceptar'),
+            onPressed: () {
+              String inputValue = title.text;
+              ref.read(titleConfig.notifier).state = inputValue;
+              Navigator.pop(ctx);
+            },
+          ),
+        ],
       );
+    },
+  );
 
-      await resultSnackbar(ref).then(
-        (snackbar) => {ScaffoldMessenger.of(ctx).showSnackBar(snackbar)},
-      );
-    }
+  await resultSnackbar(ref).then(
+    (snackbar) => {ScaffoldMessenger.of(ctx).showSnackBar(snackbar)},
+  );
+}
