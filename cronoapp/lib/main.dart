@@ -74,10 +74,8 @@ class MyApp extends ConsumerWidget {
           if (amountCycles.id != 0) {
             myData = ref.read(currentConfig.notifier).state;
           } else {
-            final timeExercise =
-                "${ref.read(secsExercise.notifier).state}:${ref.read(minsExercise.notifier).state}";
-            final timeBreak =
-                "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
+            final timeExercise = "${ref.read(secsExercise.notifier).state}:${ref.read(minsExercise.notifier).state}";
+            final timeBreak = "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
 
             myData = PersonConfig(
               id: 0,

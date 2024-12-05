@@ -12,11 +12,9 @@ class CustomCircularChronometer extends ConsumerWidget {
 
     Stream<int> totalExercise () async* {
       List cycle = ref.watch(objectCycles);
-      print(cycle);
       for (int i = 0; i < cycle.length; i++) {
         yield i;
         if (cycle[i][0] >= 0){
-          print(cycle[i][0]);
           break;
         }
       }

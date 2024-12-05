@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:cronoapp/domain/entities/new_config_model.dart';
+
 import 'package:path/path.dart';
 import 'package:cronoapp/domain/entities/person_model.dart';
 import 'package:sqflite/sqflite.dart';
