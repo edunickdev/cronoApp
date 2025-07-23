@@ -24,12 +24,6 @@ class PersonConfig {
     };
   }
 
-  set setId(int id) => id;
-  set setTitle(String title) => title;
-  set setExerciseDurationTime(String exerciseDurationTime) => exerciseDurationTime;
-  set setBreakDurationTime(String breakDurationTime) => breakDurationTime;
-  set setCycles(int cycles) => cycles;
-
   factory PersonConfig.fromMap(Map<String, dynamic> map){
     return PersonConfig(
       id: map['id'],

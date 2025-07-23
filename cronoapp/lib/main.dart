@@ -18,10 +18,15 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool brightness = prefs.getBool('brightness') ?? true;
   final int theme = prefs.getInt('theme') ?? 0;
-  runApp(ProviderScope(overrides: [
-    myBrightness.overrideWith((ref) => brightness),
-    myTheme.overrideWith((ref) => theme)
-  ], child: const MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [
+        myBrightness.overrideWith((ref) => brightness),
+        myTheme.overrideWith((ref) => theme)
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
@@ -74,8 +79,10 @@ class MyApp extends ConsumerWidget {
           if (amountCycles.id != 0) {
             myData = ref.read(currentConfig.notifier).state;
           } else {
-            final timeExercise = "${ref.read(secsExercise.notifier).state}:${ref.read(minsExercise.notifier).state}";
-            final timeBreak = "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
+            final timeExercise =
+                "${ref.read(secsExercise.notifier).state}:${ref.read(minsExercise.notifier).state}";
+            final timeBreak =
+                "${ref.read(secsBreak.notifier).state}:${ref.read(minsBreak.notifier).state}";
 
             myData = PersonConfig(
               id: 0,
