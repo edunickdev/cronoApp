@@ -12,22 +12,22 @@ class CustomButtonNavigator extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(Icons.settings),
           style: const ButtonStyle(
-              iconSize: MaterialStatePropertyAll(50),
-              iconColor: MaterialStatePropertyAll(Colors.grey)),
+              iconSize: WidgetStatePropertyAll(50),
+              iconColor: WidgetStatePropertyAll(Colors.grey)),
         ),
         IconButton(
           onPressed: () {},
           icon: const Icon(Icons.play_arrow_rounded),
           style: const ButtonStyle(
-              iconSize: MaterialStatePropertyAll(70),
-              iconColor: MaterialStatePropertyAll(Colors.green)),
+              iconSize: WidgetStatePropertyAll(70),
+              iconColor: WidgetStatePropertyAll(Colors.green)),
         ),
         IconButton(
           onPressed: () {},
           icon: const Icon(Icons.restore),
           style: const ButtonStyle(
-              iconSize: MaterialStatePropertyAll(50),
-              iconColor: MaterialStatePropertyAll(Colors.blue)),
+              iconSize: WidgetStatePropertyAll(50),
+              iconColor: WidgetStatePropertyAll(Colors.blue)),
         ),
       ],
     );

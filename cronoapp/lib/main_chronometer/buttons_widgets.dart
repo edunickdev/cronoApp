@@ -106,7 +106,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
       children: [
         FilledButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.green),
+            backgroundColor: WidgetStateProperty.all(Colors.green),
           ),
           onPressed: () {
             if (ref.watch(mainIsRunning) == false) {
@@ -134,7 +134,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
         ),
         FilledButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            backgroundColor: WidgetStateProperty.all(Colors.blue),
           ),
           onPressed: () => resetTime(ref, timer),
           child: const Padding(

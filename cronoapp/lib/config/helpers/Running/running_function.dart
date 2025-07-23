@@ -38,7 +38,7 @@ Future<void> setTitleConfig(BuildContext ctx, WidgetRef ref) async {
         actions: [
           TextButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(theme!.inversePrimary),
+              backgroundColor: WidgetStatePropertyAll(theme!.inversePrimary),
             ),
             child: const Text('Aceptar'),
             onPressed: () {
@@ -52,7 +52,6 @@ Future<void> setTitleConfig(BuildContext ctx, WidgetRef ref) async {
     },
   );
 
-  await resultSnackbar(ref).then(
-    (snackbar) => {ScaffoldMessenger.of(ctx).showSnackBar(snackbar)},
-  );
+  await resultSnackbar(ref).then((snackbar) =>
+      {if (ctx.mounted) ScaffoldMessenger.of(ctx).showSnackBar(snackbar)});
 }

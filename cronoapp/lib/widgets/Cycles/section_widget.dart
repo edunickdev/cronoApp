@@ -68,7 +68,7 @@ class SectionCyclesWidget extends ConsumerWidget {
               children: [
                 FilledButton(
                   style: ButtonStyle(
-                    fixedSize: MaterialStatePropertyAll(
+                    fixedSize: WidgetStatePropertyAll(
                       Size(
                         myConstrains.maxWidth * 0.02,
                         myConstrains.maxHeight * 0.01,
@@ -83,7 +83,7 @@ class SectionCyclesWidget extends ConsumerWidget {
                 SizedBox(width: myConstrains.maxWidth * 0.012),
                 FilledButton(
                   style: ButtonStyle(
-                    fixedSize: MaterialStatePropertyAll(
+                    fixedSize: WidgetStatePropertyAll(
                       Size(
                         myConstrains.maxWidth * 0.02,
                         myConstrains.maxHeight * 0.01,

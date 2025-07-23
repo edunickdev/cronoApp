@@ -110,7 +110,7 @@ class MainCronometerWidget extends ConsumerWidget {
                   ),
                 );
               },
-              style: const ButtonStyle(elevation: MaterialStatePropertyAll(5)),
+              style: const ButtonStyle(elevation: WidgetStatePropertyAll(5)),
               child: const Padding(
                 padding: EdgeInsets.all(12),
                 child: Text("Configurar", style: TextStyle(fontSize: 25)),
