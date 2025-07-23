@@ -15,7 +15,7 @@ void startTimeChronometer(WidgetRef ref) {
   int hours = int.parse(ref.read(mainHours.notifier).state);
 
   Timer.periodic(
-    const Duration(milliseconds: 5),
+    const Duration(milliseconds: 10),
     (timer) {
       miliseconds++;
       if (miliseconds >= 99) {

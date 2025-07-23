@@ -42,5 +42,5 @@ final myTheme = StateProvider<int>((ref) => 4);
 
 final myDataProvider = StateProvider<List<PersonConfig>>((ref) => []);
 final myTimer = StateProvider<Timer>(
-  (ref) => Timer.periodic(const Duration(milliseconds: 5), (timer) {}),
+  (ref) => Timer.periodic(const Duration(milliseconds: 10), (timer) {}),
 );

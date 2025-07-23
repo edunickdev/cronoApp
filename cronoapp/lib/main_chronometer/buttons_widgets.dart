@@ -25,7 +25,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
       }
       ref.read(mainIsRunning.notifier).state = true;
 
-      timer = Timer.periodic(const Duration(milliseconds: 5), (timer) {
+      timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
         int miliseconds = int.parse(ref.read(mainmiliSeconds.notifier).state);
         int seconds = int.parse(ref.read(mainSeconds.notifier).state);
         int minutes = int.parse(ref.read(mainMinutes.notifier).state);
@@ -71,7 +71,7 @@ class MainCronometerButtonsWidget extends ConsumerWidget {
       ref.read(mainIsRunning.notifier).state = true;
 
       timer = Timer.periodic(
-        const Duration(milliseconds: 5),
+        const Duration(milliseconds: 10),
         (timer) {
           int miliseconds = int.parse(ref.read(mainmiliSeconds.notifier).state);
           int seconds = int.parse(ref.read(mainSeconds.notifier).state);
